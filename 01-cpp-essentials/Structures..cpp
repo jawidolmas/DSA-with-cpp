@@ -35,7 +35,11 @@ struct MyStruct{
 };  // The total size of this struct is not 13, it is 16. CPU works for speed, not for efficiency. The size of a struct must be the multiple of the largest members alignement. here the double is 8, so 
     // the total size of array should be mutilple of 8 which is 16. eg. when we go to a pharmacy, they give us a stripe not only one tablet, coz it is easy for pharmacist to sell one stripe than one tablet. 
 
-
+struct MyStruct2{
+    char x;
+    double y;
+    int z;
+};     // This struct size is 24, not 16. because, the char is 1 byte + 7 padding bytes, double is 8 bytes, int is 4 + 4 padding bytes. so its simply 24 bytes. 
 
 int main(){
 
