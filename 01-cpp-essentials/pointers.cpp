@@ -7,7 +7,7 @@ struct name{
    double z;
 };
 
-
+// we use pointers to access for an external resource. for example: heap, internet, monitor, keyboard, etc..
 int main(){
 
     int a = 30;
