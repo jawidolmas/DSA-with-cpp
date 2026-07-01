@@ -6,7 +6,7 @@ This repository serves as a rigorous self-study track focused on low-level memor
 
 ---
 
-## 🛠️ System Architecture & Roadmap
+##  System Architecture & Roadmap
 
 The codebase is strictly modularized to separate foundational language mechanics, clean data structure blueprints, and algorithmic problem-solving tasks.
 
