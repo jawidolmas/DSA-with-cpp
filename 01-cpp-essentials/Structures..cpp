@@ -28,6 +28,14 @@ void updateGpaByReference(Student &s1, float new_gpa){
     s1.gpa = new_gpa;
 }
 
+struct MyStruct{
+    double x; // 8 bytes
+    int  y; //  4 bytes;
+    char z; // 1 byte. 
+};  // The total size of this struct is not 13, it is 16. CPU works for speed, not for efficiency. The size of a struct must be the multiple of the largest members alignement. here the double is 8, so 
+    // the total size of array should be mutilple of 8 which is 16. eg. when we go to a pharmacy, they give us a stripe not only one tablet, coz it is easy for pharmacist to sell one stripe than one tablet. 
+
+
 
 int main(){
 
