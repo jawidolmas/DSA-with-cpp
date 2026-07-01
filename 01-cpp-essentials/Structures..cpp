@@ -39,7 +39,7 @@ struct MyStruct2{
     char x;
     double y;
     int z;
-};     // This struct size is 24, not 16. because, the char is 1 byte + 7 padding bytes, double is 8 bytes, int is 4 + 4 padding bytes. so its simply 24 bytes. 
+};     // This struct size is 24, not 16. because, the char is 1 byte + 7 padding bytes, double is 8 bytes, int is 4 + 4 padding bytes. so its simply 24 bytes. 24 is the multiple of 8 which is double's size.
 
 int main(){
 
