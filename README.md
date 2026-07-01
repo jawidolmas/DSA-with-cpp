@@ -11,7 +11,7 @@ This repository serves as a rigorous self-study track focused on low-level memor
 The codebase is strictly modularized to separate foundational language mechanics, clean data structure blueprints, and algorithmic problem-solving tasks.
 
 ```text
-dsa-cpp/
+DSA-with-cpp/
 ├── 01-cpp-essentials/      # Pointers, references, memory allocation, and structures
 ├── 02-recursion/           # Stack execution tracing, mathematical paradigms
 ├── 03-arrays-matrices/     # Sequential allocation, dynamic resizing mechanics
