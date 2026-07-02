@@ -23,25 +23,32 @@ Enter radius: 7
 Area = 153.86
 Circumference = 43.96*/
 
+// When we create a class for a specific data type such as integer, and after a period of time if we need another class type of double, 
+//we must create a new class of type double. BUT THAT WILL WASTE OF TIME and bad programming. 
+// Template gives us the ability to create any type of data within the same class. 
+template<class T>
 class Circle{
 
     private:
-        double radius;
-        double pi = 3.14;
+        T radius;
+        const double pi = 3.14;
     public:
         Circle(){radius = 0;}
-        Circle(double rad);
-        double circum() const;
-        double area() const;
+        Circle(T rad);
+        T circum() const;
+        T area() const;
 };
 
-    Circle::Circle(double rad){
+    template<class T>
+    Circle<T>::Circle(T rad){
         radius = rad;
     }
-    double Circle::circum() const{
+    template<class T>
+    T Circle<T>::circum() const{
         return 2 * pi * radius;
     }
-    double Circle::area() const{
+    template<class T>
+    T Circle<T>::area() const{
         return pi * (radius * radius);
     }
 
@@ -53,7 +60,7 @@ int main(){
     std::cout << "Enter Radius: ";
     std::cin >> rad;
 
-    Circle c(rad);
+    Circle<double> c(rad);
     std::cout << "Area: " << c.area() << std::endl;
     std::cout << "Circumferance: " << c.circum() << std::endl;
 
