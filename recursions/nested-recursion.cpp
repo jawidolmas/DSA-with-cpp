@@ -30,7 +30,7 @@ int main(){
 
     Recursion r1;
     // We call only function A, it indirectly calls function B to solve our problem
-    int result = r1.NestedRecursion(95);  // output: 201998431
+    int result = r1.NestedRecursion(95);  // output: 91
     std::cout << result; // the functions run until the inner recursive becomes 101 and when it goes to outer recursive, it will be 101 > 100, which is true. it doesnt enter the "else" and returns 101-10 = 91. so O/P: 91
     return 0;
 }
