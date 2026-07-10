@@ -104,9 +104,7 @@ Examples:
 
 Thus, the **time complexity** of the recursive solution is:
 
-\[
-\boxed{O(2^n)}
-\]
+O(2^n)
 
 This is **optimal** in terms of number of moves; no algorithm can solve TOH with fewer moves while obeying the rules. [web:42][web:44][web:45]
 
@@ -115,9 +113,7 @@ This is **optimal** in terms of number of moves; no algorithm can solve TOH with
 - The recursion depth is at most `n` (one level per disk).
 - Therefore, the **space complexity** (call stack) is:
 
-\[
-\boxed{O(n)}
-\]
+O(n)
 
 ---
 
