@@ -11,5 +11,13 @@ class Array{
         void insert(int index, int n);
         void Delete(int index);
         void display() const;
+        int  length() const;
+        bool isEmpty() const;
+        bool isFull() const;
+        int  Max() const;
+        int  Min() const; 
+        int  sum() const;
+        double average() const;
+        void linearsearch(int n) const;
     
 };

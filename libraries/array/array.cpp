@@ -47,7 +47,7 @@ if size is bigger than capacity? size>capacity, then it its true, that means the
 // Insert:
 
 void Array::insert(int index, int n){
-    if(size == capacity){
+    if(isFull()){
         std::cout << "Array is full\n";
         return;
     }
@@ -60,7 +60,7 @@ void Array::insert(int index, int n){
 
 // Delete
 void Array::Delete(int index){
-    if(size == 0 || index >= size || index < 0){
+    if(isEmpty() || index >= size || index < 0){
         std::cout << "Either array is empty or index is invalid\n";
         return;
     }
@@ -68,6 +68,111 @@ void Array::Delete(int index){
           A[i] = A[i+1];
     }
     size--;
+}
+
+
+// Length
+
+int Array::length() const{
+    return size;
+}
+
+// IsEmpty
+
+bool Array::isEmpty() const{
+    if(size == 0){
+        return true;
+    }
+    else return false;
+}
+
+
+// isFull
+
+bool Array::isFull() const{
+    if (size == capacity){
+        return true;
+    }
+    else return false;
+}
+
+// Max
+
+int Array::Max() const{
+    
+    if(isEmpty()){
+        return 0;
+    } 
+    int maximum = A[0];
+    for(int i = 1; i < size; i++){
+        if(A[i] > maximum){
+            maximum = A[i];
+        }
+    }
+    return maximum;
+}
+
+// Min
+
+int Array::Min() const{
+    if(isEmpty()){
+        return 0;
+    }
+    int minimum = A[0];
+    for(int i = 1; i < size; ++i){
+        if(A[i] < minimum){
+            minimum = A[i];
+        }
+    }
+    return minimum;
+}
+
+// Sum
+
+int Array::sum() const{
+    if(isEmpty()){
+        std::cout << "Array is empty\n";
+        return 0;
+    }
+    int sum = 0;
+    for(int i = 0; i < size; i++){
+        sum += A[i];
+    }
+    return sum;
+}
+
+
+// Average
+
+double Array::average() const{
+    if(isEmpty()){
+        std::cout << "Array is empty\n";
+        return 0;
+    }
+    double avg = 0.0;
+    avg = (double)sum()/length();
+    return avg;
+}
+
+
+// Linear Search
+
+void Array::linearsearch(int n) const{
+    
+    if(isEmpty()){
+        std::cout << "Array is empty\n";
+        return;
+    }
+    bool found = false;
+    for(int i = 0; i < size; i++){
+        if (A[i] == n){
+            std::cout << n <<" Found in index: " << i << "  ";
+            found = true;
+        }
+    }   
+    if(!found){
+    std::cout << "Data not found!\n";
+}
 }
 
 
