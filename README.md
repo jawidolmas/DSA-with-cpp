@@ -18,4 +18,6 @@ DSA-with-cpp/
 ├── 04-linked-lists/        # Linear non-contiguous memory structures
 ├── 05-stacks-queues/       # Abstract Data Types (ADTs) via arrays & linked lists
 ├── 06-trees-graphs/        # Non-linear hierarchical and network topologies
+├── 07-libraries/           # Standalone, documented libraries (Array, LinkedList, etc.) with README + license
 └── leetcode/               # Algorithmic sandbox for competitive programming puzzles
+
