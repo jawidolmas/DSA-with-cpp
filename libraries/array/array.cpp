@@ -47,7 +47,7 @@ if size is bigger than capacity? size>capacity, then it its true, that means the
 // Insert:
 
 void Array::insert(int index, int n){
-    if(isFull()){
+    if(isFull() || index > size || index < 0){
         std::cout << "Array is full\n";
         return;
     }
