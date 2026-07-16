@@ -70,7 +70,7 @@ is 3 in here, I will stop and add the new value there;
 
 void ArrayADT::insert(int index, int n){
     // First of all, I need to check if array is full, or the wanted index is not in array at all; in array of capacity 10, insert(12, 5) is impossible;
-    if(size == capacity || index > capacity){
+    if(size == capacity || index > capacity || index < 0){
         std::cout << "Array is either full or index is invalid\n";
         return; // stop;
     }
