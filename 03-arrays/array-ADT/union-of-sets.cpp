@@ -5,6 +5,9 @@ using namespace std;
 
 // Union of two sets. A+B;
 
+// A set mathematically can not have internal duplicates. so inputs should suit this rule. 
+
+
 class ArrayADT{
     private:
         int *A; // pointer to point to array's first add in heap
@@ -15,6 +18,7 @@ class ArrayADT{
         ~ArrayADT();     
         void append(int value); 
         ArrayADT unionOfSet(ArrayADT &arr1, ArrayADT &arr2);
+        ArrayADT unionOfSetSorted(ArrayADT &arr1, ArrayADT &arr2);
         void display() const;
 };
 
@@ -96,12 +100,50 @@ ArrayADT ArrayADT::unionOfSet(ArrayADT &arr1, ArrayADT &arr2){
     return arr3;
 }
 
+// Now let's code sorted array. 
+
+ArrayADT ArrayADT::unionOfSetSorted(ArrayADT &arr1, ArrayADT &arr2){
+    ArrayADT arr3(arr1.size + arr2.size);           // Distination Array;
+    int i, j, k;
+    i = j = k = 0;
+    
+    // We will use the logic of merge.   check the merge-sorted-array.cpp in same directory
+    while(i < arr1.size && j < arr2.size){
+        if(arr1.A[i] < arr2.A[j]){
+            arr3.A[k++] = arr1.A[i++];
+            arr3.size++;
+        }
+        else if(arr1.A[i] > arr2.A[j]){
+            arr3.A[k++] = arr2.A[j++];
+            arr3.size++;
+        }
+        else{
+            arr3.A[k++] = arr1.A[i++];
+            arr3.size++;
+            j++;
+        }
+    }
+
+        for(; i<arr1.size; i++){
+            arr3.A[k++] = arr1.A[i];
+            arr3.size++;
+        }
+        for(; j<arr2.size; ++j){
+            arr3.A[k++] = arr2.A[j];
+            arr3.size++;
+        }
+    
+
+    return arr3;
+}
+
+
 
 
 int main()
 {
-    int Values[] = {12, 5, 9, 1, 8};
-    int Values2[] = {-34, 5, 1, 7, 12};
+    int Values[] = {1, 8, 12, 31, 85};
+    int Values2[] = {-34, 1, 8, 32, 90};
     ArrayADT arr(5);
     for(int i = 0; i<5; i++){
         arr.append(Values[i]);
@@ -111,7 +153,7 @@ int main()
         arr2.append(Values2[i]);
     }   
     
-    ArrayADT arr3 = arr.unionOfSet(arr, arr2);
+    ArrayADT arr3 = arr.unionOfSetSorted(arr, arr2);
     arr3.display();
     return 0;           
 }
@@ -121,6 +163,8 @@ int main()
 
 /*
     ANALYSIS:
+
+       UNSORTED ARRAY:
         -This function, does a work of quadratic, as we discussed in explanation, this uses a writing from A to C, then searching and comparing all elements in B 
         with C. so this really does a very hard work, which makes the program slow.
         -We do a work of n for copying A to C, then we will do a work of m(m is size of B) for Copying B to C, but we also do a work of n for searaching and comparing,
@@ -134,4 +178,8 @@ int main()
         there is better ways. we need to be sure of what tradeoffs we do. 
         -We also can sort the array first, and then take its union, also, if we store the arr3 in a new array, then do we really need to search element by element? I dont 
         think so, but again, this is what I personally think. 
+
+      SORTED ARRAY:
+        -This function does a work of O(n). reason: the sets are sorted, and we only do one work on each write, the while does only one camparison. thats it. 
+        -To conclude, this function gives us the ability to save time, from quadratic to linear. 
 */
