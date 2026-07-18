@@ -65,7 +65,7 @@ int ArrayADT::binarySearch(int l, int h, int key){
         if(A[mid] == key){
             return mid;
         }
-        else if(mid < key){
+        else if(A[mid] < key){
             l = mid + 1;
         }
         else{
