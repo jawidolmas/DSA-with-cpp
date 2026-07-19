@@ -8,11 +8,11 @@ using namespace std;
 int main(){
 
     Array arr(5);
+    arr.append(10);
     arr.append(20);
-    arr.append(16);
-    arr.append(17);
-    arr.append(18);
-    arr.insert(0, 15);
+    arr.append(30);
+    arr.append(40);
+    arr.insert(0, 10);
     arr.display();
     arr.Delete(6);
     arr.display();
@@ -21,15 +21,12 @@ int main(){
     cout << arr.Min() << endl;
     cout << arr.sum() <<endl;
     cout << arr.average() << endl;
-    arr.linearsearch(20);
+    arr.linearsearch(10);
     cout << arr.get(4) << endl;
-    arr.set(4, 9);
-    arr.transpositionLinearSe(9);
     arr.display();
-    arr.transpositionLinearSe(9);
-    arr.display();
-    arr.movetoFrontLinearSe(17);
-    arr.display();
-    arr.movetoFrontLinearSe(17);
-    arr.display();
+    arr.BinarySearchRecursive(0, 5, 40);
+   
+    
+
+
 }
