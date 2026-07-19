@@ -3,6 +3,7 @@ class Array{
         int *A;
         int capacity;   // Number of slots or indices in array
         int size;       // number of real values in each index.
+        void swap(int &a, int &b);
 
     public:
         Array(int cap);
@@ -19,5 +20,8 @@ class Array{
         int  sum() const;
         double average() const;
         void linearsearch(int n) const;
-    
+        int get(int index) const;
+        void set(int index, int value);    
+        void transpositionLinearSe(int value);
+        void movetoFrontLinearSe(int value);
 };
