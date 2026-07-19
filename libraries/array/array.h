@@ -19,9 +19,11 @@ class Array{
         int  Min() const; 
         int  sum() const;
         double average() const;
-        void linearsearch(int n) const;
+        void linearsearch(int key) const;
         int get(int index) const;
         void set(int index, int value);    
-        void transpositionLinearSe(int value);
-        void movetoFrontLinearSe(int value);
+        void transpositionLinearSe(int key);
+        void movetoFrontLinearSe(int key);
+        int BinarySearchIterative(int key) ;
+        int BinarySearchRecursive(int l, int h, int key) ;
 };
