@@ -27,6 +27,13 @@ A simple static array class implemented in C++, built from scratch as a learning
 | `sum()` | Returns the sum of all elements | O(n) |
 | `average()` | Returns the average of all elements | O(n) |
 | `linearsearch(int n)` | Searches for a value and prints all matching indices | O(n) |
+| `get(int index)` | Searches for the value of a given index and returns value | O(1) |
+| `Set(int index, int value)` | Replaces a value in a given index with new value | O(1) |
+| `transpositionLinearSe(int key)` | Searches for a value and prints all matching indices, improved version of Linear Search | O(n) |
+| `movetoFrontLinearSe (int n)` | Searches for a value and prints all matching indices, improved version of Linear Search 2nd method | O(n) |
+| `BinarySearchIterative(int key)` | Searches for a value in a sorted array, using loop | O(logn) |
+| `BinarySearchRecursion(int key)` | Searches for a value in a sorted array, using recursion | O(logn) |
+
 
 ## Requirements
 
