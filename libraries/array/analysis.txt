@@ -1,0 +1,163 @@
+ARRAY.CPP — FUNCTION ANALYSIS
+==============================
+Data structure: fixed-capacity dynamic array (A = new int[cap]), size/capacity tracked separately.
+
+------------------------------------------------------------
+Array(int cap)                                    [Constructor]
+Time:  O(1)  (allocation itself is O(1) from the caller's view; memory not zero-initialized)
+Space: O(cap)
+Notes: No check that cap > 0. new can throw std::bad_alloc if allocation fails — not caught anywhere.
+
+------------------------------------------------------------
+~Array()                                          [Destructor]
+Time:  O(1)
+Space: O(1)
+Notes: Correctly releases A with delete[]. No copy constructor / copy assignment operator defined,
+       so copying an Array (e.g. passing by value) does a shallow copy of the pointer and will
+       double-free on destruction. Rule of Three is violated. Fine as-is only if the class is
+       never copied.
+
+------------------------------------------------------------
+swap(int &a, int &b)
+Time:  O(1)
+Space: O(1)
+Notes: Standard 3-variable swap. Correct.
+
+------------------------------------------------------------
+display() const
+Time:  O(n) — visits every element once
+Space: O(1) extra
+Notes: Straightforward, nothing to optimize.
+
+------------------------------------------------------------
+append(int n)
+Time:  O(1) amortized... actually O(1) exactly, not amortized, since there's no resizing.
+Space: O(1)
+Notes: This is the function the original comments were reasoning through out loud. The conclusion
+       reached in the comments is correct: checking "full" is a single integer comparison
+       (size == capacity), not a scan, so append is O(1). No resizing/doubling strategy exists —
+       once capacity is hit, append silently refuses and prints a message rather than growing
+       the array. That's a reasonable design choice for a fixed-capacity array, just worth being
+       explicit about (a "growable" array would need amortized-O(1) analysis instead).
+
+------------------------------------------------------------
+insert(int index, int n)
+Time:  O(n) worst case — shifts up to size elements right to make room
+Space: O(1)
+Notes: Bounds check (index > size || index < 0) is correct — insert allows index == size
+       (append-at-end via insert). isFull() check is O(1).
+
+------------------------------------------------------------
+Delete(int index)
+Time:  O(n) worst case — shifts up to size elements left to close the gap
+Space: O(1)
+Notes: Bounds check correct (index >= size caught). Capitalized method name is inconsistent with
+       the rest of the class's lowerCamelCase (see cleanup notes).
+
+------------------------------------------------------------
+length() const
+Time:  O(1)
+Space: O(1)
+
+------------------------------------------------------------
+isEmpty() const / isFull() const
+Time:  O(1) each
+Space: O(1)
+Notes: Both can be written as a single return statement (return size == 0;) instead of an
+       if/else — purely stylistic, same complexity.
+
+------------------------------------------------------------
+Max() const / Min() const
+Time:  O(n) — must scan every element once, no way to do better on an unsorted array
+Space: O(1)
+Notes: Returning 0 for an empty array is ambiguous (0 is a valid data value). No error signal
+       is given to the caller. Consider a sentinel/exception/out-param if this matters for your use case.
+
+------------------------------------------------------------
+sum() const
+Time:  O(n)
+Space: O(1)
+
+------------------------------------------------------------
+average() const
+Time:  O(n) — dominated by the internal call to sum()
+Space: O(1)
+Notes: Calls isEmpty() itself, then calls sum() which calls isEmpty() again, and length() —
+       redundant but not asymptotically relevant. Correct use of double cast before division.
+
+------------------------------------------------------------
+linearsearch(int key) const
+Time:  O(n) worst case
+Space: O(1)
+Notes: Does NOT return early on first match — intentionally scans the whole array and reports
+       every matching index. If only the first match is needed, this is doing more work than
+       necessary; if reporting all duplicates is the goal, this is correct and appropriately O(n).
+
+------------------------------------------------------------
+get(int index) const
+Time:  O(1)
+Space: O(1)
+Notes: Returns -1 as a "not found" sentinel, which collides with -1 being a legitimate stored value.
+
+------------------------------------------------------------
+set(int index, int value)
+Time:  O(1)
+Space: O(1)
+
+------------------------------------------------------------
+transpositionLinearSe(int key)
+Time:  O(n)
+Space: O(1)
+Notes: Self-organizing search (move-ahead-one heuristic) — good idea for skewed access patterns
+       since frequently-searched items migrate toward the front over repeated calls.
+       Bug: does not call isEmpty() first (harmless here since the loop just won't execute on
+       size == 0, but inconsistent with the rest of the class). Also continues scanning after a
+       match instead of stopping, so on arrays with duplicate keys it will repeatedly swap and
+       keep matching already-swapped elements — behavior is a bit unpredictable with duplicates.
+
+------------------------------------------------------------
+movetoFrontLinearSe(int key)
+Time:  O(n)
+Space: O(1)
+Notes: Same self-organizing family as transposition search, but moves the match all the way to
+       index 0 instead of one step. Same duplicate-key caveat as transpositionLinearSe.
+
+------------------------------------------------------------
+BinarySearchIterative(int key)
+Time:  O(log n)
+Space: O(1)
+Notes: Correctly uses l + (h-l)/2 to avoid signed-integer overflow instead of (l+h)/2 — this is
+       already the right technique, good catch in the original comment.
+       PRECONDITION (not enforced): array must be sorted ascending. No check/assertion for this;
+       silently gives wrong results on unsorted data.
+
+------------------------------------------------------------
+BinarySearchRecursive(int l, int h, int key)
+Time:  O(log n)
+Space: O(log n) — recursion call stack depth, unlike the iterative version's O(1) space
+Notes: Same sortedness precondition as the iterative version. Functionally equivalent to
+       BinarySearchIterative but trades O(1) space for O(log n) stack space — prefer the
+       iterative version unless recursion is required by the assignment/style.
+
+==============================
+SUMMARY TABLE
+
+Function                    Time            Space
+Array (ctor)                O(1)            O(cap)
+~Array (dtor)                O(1)            O(1)
+swap                         O(1)            O(1)
+display                      O(n)            O(1)
+append                       O(1)            O(1)
+insert                       O(n)            O(1)
+Delete                       O(n)            O(1)
+length                       O(1)            O(1)
+isEmpty / isFull             O(1)            O(1)
+Max / Min                    O(n)            O(1)
+sum                          O(n)            O(1)
+average                      O(n)            O(1)
+linearsearch                 O(n)            O(1)
+get / set                    O(1)            O(1)
+transpositionLinearSe        O(n)            O(1)
+movetoFrontLinearSe          O(n)            O(1)
+BinarySearchIterative        O(log n)        O(1)
+BinarySearchRecursive        O(log n)        O(log n)
