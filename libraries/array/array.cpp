@@ -10,6 +10,15 @@ Array::Array(int cap){
 
 
 
+// Swap
+
+void Array::swap(int &a, int &b){
+    int temp = 0;
+    temp = a; 
+    a = b;
+    b = temp;
+}
+
 // Display
 void Array::display() const{
     for(int i=0; i<size; i++){
@@ -166,7 +175,7 @@ void Array::linearsearch(int n) const{
     bool found = false;
     for(int i = 0; i < size; i++){
         if (A[i] == n){
-            std::cout << n <<" Found in index: " << i << "  ";
+            std::cout << n <<" Found in index: " << i << "  \n";
             found = true;
         }
     }   
@@ -175,6 +184,69 @@ void Array::linearsearch(int n) const{
 }
 }
 
+
+// Get
+
+int Array::get(int index) const{
+    if(index >= 0 && index < size){
+        return A[index];
+    }
+    return -1;      // No value in that index.
+}
+
+
+// Set
+
+void Array::set(int index, int value){
+    if(index >= 0 && index < size){
+            A[index] = value;
+    }
+    else {
+        std::cout << "Invalid index\n";
+    }
+}
+
+
+// Transposition Linear Search
+
+void Array::transpositionLinearSe(int value){
+    bool found = false;
+    for(int i = 0; i<size; i++){
+        if(value == A[i]){
+            found = true;
+            std::cout << "The value " << value << " Found in index " << i << "\n";
+            if(i > 0){
+            swap(A[i], A[i-1]);
+        }
+    }
+    }
+    if(!found){
+        std::cout << "Data not found\n";
+        return;
+    }
+    
+}
+
+
+// Move to Front/Head Linear Search 
+
+void Array::movetoFrontLinearSe(int value){
+    bool found = false;
+    for(int i = 0; i<size; i++){
+        if(value == A[i]){
+            found = true;
+            std::cout << "The value " << value << " Found in index " << i << "\n";
+            if(i > 0){
+            swap(A[i], A[0]);
+        }
+    }
+    }
+    if(!found){
+        std::cout << "Data not found\n";
+        return;
+    }
+    
+}
 
 
 // Destructor
