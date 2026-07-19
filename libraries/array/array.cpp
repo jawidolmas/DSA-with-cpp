@@ -8,8 +8,6 @@ Array::Array(int cap){
     size = 0;
 }
 
-
-
 // Swap
 
 void Array::swap(int &a, int &b){
@@ -27,19 +25,8 @@ void Array::display() const{
     std::cout << std::endl;
 }
 
+// Append
 
-
-
-// Append 
-/*This function's prupose is to append a data at the end. if we think about adding something at the end, we need to do 2 things:
-    1. Check if array is empty
-    2. Check if array is full
-    3. If conditions met, then add the data at the end and return. 
-    According to these operations, I think that append does a function of 3, so I think this function complexity will be O(1), 
-    at the same time, if we want to check if array is not full, we may need a loop to trace each index, so in that case, we may jump to O(n), 
-    but as we are guessing right now, we may can handle checking fullness of array in some way other than loop, can we really trace an array without a loop or at least less
-    work than loop? wait, do we really need to trace all array? what if I do while(array != size -1), again we entered a loop, so I think we highly will have an O(n).
-    lets see. Actually, I can see that we dont need a loop, we just can compare size and capacity to understand if array is full. */
 void Array::append(int n){
     if(size == capacity){
         std::cout << "Array is full\n";
@@ -48,12 +35,8 @@ void Array::append(int n){
     A[size] = n;
     size++;
 }
-/*Ohh yeah, the size is number of indices in array that has a real value, and the capacity is number of whole array. 
-so in fact, if we increment size by one each time, size++ after adding and compare size with capacity that, 
-if size is bigger than capacity? size>capacity, then it its true, that means the array is full. isnt it? so this gives us O(1) in append. */
 
-
-// Insert:
+// Insert
 
 void Array::insert(int index, int n){
     if(isFull() || index > size || index < 0){
@@ -110,6 +93,7 @@ bool Array::isFull() const{
 int Array::Max() const{
     
     if(isEmpty()){
+        std::cout << "Array is empty\n";
         return 0;
     } 
     int maximum = A[0];
@@ -125,6 +109,7 @@ int Array::Max() const{
 
 int Array::Min() const{
     if(isEmpty()){
+        std::cout << "Array is empty\n";
         return 0;
     }
     int minimum = A[0];
@@ -166,7 +151,7 @@ double Array::average() const{
 
 // Linear Search
 
-void Array::linearsearch(int n) const{
+void Array::linearsearch(int key) const{
     
     if(isEmpty()){
         std::cout << "Array is empty\n";
@@ -174,8 +159,8 @@ void Array::linearsearch(int n) const{
     }
     bool found = false;
     for(int i = 0; i < size; i++){
-        if (A[i] == n){
-            std::cout << n <<" Found in index: " << i << "  \n";
+        if (A[i] == key){
+            std::cout << key <<" Found in index: " << i << "  \n";
             found = true;
         }
     }   
@@ -189,8 +174,10 @@ void Array::linearsearch(int n) const{
 
 int Array::get(int index) const{
     if(index >= 0 && index < size){
+        std::cout << "The value in given index is: " << A[index] <<"\n";
         return A[index];
     }
+    std::cout << "No Data founded in given index\n";
     return -1;      // No value in that index.
 }
 
@@ -209,12 +196,16 @@ void Array::set(int index, int value){
 
 // Transposition Linear Search
 
-void Array::transpositionLinearSe(int value){
+void Array::transpositionLinearSe(int key){
+    if(isEmpty()){
+        std::cout << "Array is empty\n";
+        return;
+    }
     bool found = false;
     for(int i = 0; i<size; i++){
-        if(value == A[i]){
+        if(key == A[i]){
             found = true;
-            std::cout << "The value " << value << " Found in index " << i << "\n";
+            std::cout << "The value " << key << " Found in index " << i << "\n";
             if(i > 0){
             swap(A[i], A[i-1]);
         }
@@ -230,12 +221,16 @@ void Array::transpositionLinearSe(int value){
 
 // Move to Front/Head Linear Search 
 
-void Array::movetoFrontLinearSe(int value){
+void Array::movetoFrontLinearSe(int key){
+     if(isEmpty()){
+        std::cout << "Array is empty\n";
+        return;
+    }
     bool found = false;
     for(int i = 0; i<size; i++){
-        if(value == A[i]){
+        if(key == A[i]){
             found = true;
-            std::cout << "The value " << value << " Found in index " << i << "\n";
+            std::cout << "The value " << key << " Found in index " << i << "\n";
             if(i > 0){
             swap(A[i], A[0]);
         }
@@ -246,6 +241,64 @@ void Array::movetoFrontLinearSe(int value){
         return;
     }
     
+}
+
+
+// Binary search using loop( Better than recursive version)
+// Array must be sorted
+
+int Array::BinarySearchIterative(int key){
+
+    if(isEmpty()){
+        std::cout << "Array is empty\n";
+        return -1;
+    }
+        int l, h, mid;
+        l = 0;
+        h = size - 1;
+        mid = 0;
+
+        while(l <= h){
+            mid = l + (h-l)/2;          // Handles integer overflow, better instead of (l+h)/2
+            if(A[mid] == key){
+                std::cout << "Data found in index: " << mid << "\n";
+                return mid;
+            }
+            else if(A[mid] > key){
+                h = mid-1;
+            }
+            else{
+                l = mid+1;
+            }
+        }
+        return -1;
+}
+
+// Binary search Recursive
+// Array must be sorted
+
+int Array::BinarySearchRecursive(int l, int h, int key){
+    if(isEmpty()){
+        std::cout << "Array is empty\n";
+        return -1;
+    }
+    if(l > h){
+        return -1;
+    }
+
+    int mid = l + (h-l)/2;
+
+    if(A[mid] == key){
+        std::cout << "Data found in index: " << mid << "\n";
+        return mid;
+    }
+    else if(A[mid] > key){
+        return BinarySearchRecursive(l, mid - 1, key);
+    }
+    else{
+        return BinarySearchRecursive(mid+1, h, key);
+    }
+
 }
 
 
