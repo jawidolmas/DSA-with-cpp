@@ -1,12 +1,9 @@
 #include<iostream>
 
 
-// SETS: 
+// Finding missing elements in sorted array: 
 
-// Difference of two arrays. 
-
-// A set mathematically can not have internal duplicates. so inputs should suit this rule. 
-
+// Finding missing element in a sorted first N natural numbers. 
 
 class ArrayADT{
     private:
@@ -95,7 +92,7 @@ int main()
     for(int i = 0; i<9; i++){
         arr.append(Values[i]);
     }    
-    arr.FindMissingElement();
+    arr.FindMissingElement();       // 7 missing.
 
 
     return 0;           
