@@ -36,7 +36,15 @@ int main(){
     */
     Array arr3 = arr.Merge(arr, arr2);
     arr3.display();
-    arr.ReverseUsingAuxiliaryArray(arr);
+    arr.Rightshift();
+    arr.display();
+    arr.Rightshift();
+    arr.display();
+    arr.Rightshift();
+    arr.display();
+    arr.Rightshift();
+    arr.display();
+    arr.Rightshift();
     arr.display();
    
     
