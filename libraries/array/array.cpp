@@ -330,6 +330,7 @@ Array Array::Merge(Array &arr1, Array &arr2){
 //Reverse
 
 void Array::Reverse(){
+    if(size <= 1) return;
     int i = 0, j = size-1;
     while( i < j){
         swap(A[i], A[j]);
@@ -342,6 +343,7 @@ void Array::Reverse(){
 // Reverse Using Auxiliary Array
 
 void Array::ReverseUsingAuxiliaryArray(Array &arr){
+    if(size <= 1) return;
     Array arr2(arr.size);
     for(int i = 0, j = arr.size-1; i<arr.size; i++, j--){
         arr2.A[i] = arr.A[j];
@@ -352,6 +354,39 @@ void Array::ReverseUsingAuxiliaryArray(Array &arr){
     }
     
 }
+
+
+// Circular Left shift
+
+void Array::leftshift(){
+    if(size <= 1)   return;
+    int first = A[0];
+    int i = 1, j  = size-1;
+    for(; i<size; i++){
+        A[i-1] = A[i];
+        
+    }
+    A[j] = first;
+    
+}
+
+
+// Circular Righ Shift
+
+
+void Array::Rightshift(){
+    if(size <= 1)   return;
+    int last = A[size-1];
+    int i = size-1;
+    for(; i > 0; i--){
+        A[i] = A[i-1];
+        
+    }
+    A[0] = last;
+    
+}
+
+
 
 // Destructor
 Array::~Array(){

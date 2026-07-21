@@ -29,4 +29,6 @@ class Array{
         Array Merge(Array &arr1, Array &arr2);
         void Reverse();
         void ReverseUsingAuxiliaryArray(Array &arr);
+        void leftshift();
+        void Rightshift();
 };
