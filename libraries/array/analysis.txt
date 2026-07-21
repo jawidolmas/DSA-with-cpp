@@ -139,6 +139,54 @@ Notes: Same sortedness precondition as the iterative version. Functionally equiv
        BinarySearchIterative but trades O(1) space for O(log n) stack space — prefer the
        iterative version unless recursion is required by the assignment/style.
 
+-------------------------------------------------------------
+Array Merge(Array &arr1, Array &arr2)
+Time: O(n)
+Space: O(n)
+This function is to merge two sorted array in one new array. it contains one loop for copying datas from two array in 3rd array. 
+We have condition checks which merge the numbers in a sorted pattern. they also do a work of n. 
+arr3.size++ increments on each iteration, because the constructor sets size = 0 for new objects.
+The last two for loops does a work that depends in size of arrays, so it is negligible, not considerable. We onyl count them in complx. function. 
+This array is a class type Array, because we are returning the new merged array. 
+
+
+--------------------------------------------------------------
+void Array::Reverse()
+Time: O(n)
+Space: O(1)
+The time is O(n), because we trace each element one by one and then swap them using the function swap. swaping function independently 
+does a work of constant, just a 3 variable modifying, which passed by reference.
+Space complexity is constant, because we take int type space 2 times. swap complx. depends on itself, regardless of Reverse func.
+
+
+--------------------------------------------------------------
+void Array::ReverseUsingAuxiliaryArray(Array &arr)
+Time: O(n)
+Space: O(n)
+This function uses both space and time equally. we create a brand new array to store the main array from last to first. 
+After that, we copy the elements from array B to main array again. so this does a work of n, so its Order of n. and it takes 
+a space of n, for new array, so it is n in terms of space too. 
+
+
+--------------------------------------------------------------
+void Array::leftshift()
+Time: O(n)
+Space: O(1)
+As we can see in here, we have two variables and one loop, the loop goes from 0 to last, and on each iteration we store the i value
+in i-1 index, at the end, we store the first element of array in last. As a result, we have a circular rotation, as it starts from left,
+it is circular left rotation. 
+Because loop does a work of n, time is n and its constant in terms of space. 
+
+
+--------------------------------------------------------------
+void Array::Rightshift()
+Time: O(n)
+Space: O(1)
+This function is a mirror for left circular rotation, the reflection of it. The rotation starts from right and converse to left, 
+the last element will be stored in first index. 
+Time is n, as always space is constant for this function. 
+
+
 ==============================
 SUMMARY TABLE
 
@@ -161,3 +209,8 @@ transpositionLinearSe        O(n)            O(1)
 movetoFrontLinearSe          O(n)            O(1)
 BinarySearchIterative        O(log n)        O(1)
 BinarySearchRecursive        O(log n)        O(log n)
+Merge                        O(n)            O(n)
+Reverse                      O(n)            O(1)
+ReverseUsingAuxiliaryArray   O(n)            O(n)
+leftshift                    O(n)            O(1)
+Rightshift                   O(n)            O(1)
