@@ -27,4 +27,6 @@ class Array{
         int BinarySearchIterative(int key) ;
         int BinarySearchRecursive(int l, int h, int key) ;
         Array Merge(Array &arr1, Array &arr2);
+        void Reverse();
+        void ReverseUsingAuxiliaryArray(Array &arr);
 };
