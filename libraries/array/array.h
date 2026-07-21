@@ -26,4 +26,5 @@ class Array{
         void movetoFrontLinearSe(int key);
         int BinarySearchIterative(int key) ;
         int BinarySearchRecursive(int l, int h, int key) ;
+        Array Merge(Array &arr1, Array &arr2);
 };
