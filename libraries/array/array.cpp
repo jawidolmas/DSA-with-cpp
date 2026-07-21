@@ -301,6 +301,32 @@ int Array::BinarySearchRecursive(int l, int h, int key){
 
 }
 
+// Merge sorted array
+
+Array Array::Merge(Array &arr1, Array &arr2){
+    Array arr3(arr1.size + arr2.size);
+    int i, j, k = 0;
+    for(i = 0, j = 0; i<arr1.size && j<arr2.size;){
+            if(arr1.A[i] < arr2.A[j]){
+                arr3.A[k++] = arr1.A[i++];
+                arr3.size++;
+            }
+            else{
+                arr3.A[k++] = arr2.A[j++];
+                arr3.size++;
+            }
+    }
+    for(; i<arr1.size; i++){
+        arr3.A[k++] = arr1.A[i];
+        arr3.size++;
+    }
+    for(; j<arr2.size; j++){
+        arr3.A[k++] = arr2.A[j];
+        arr3.size++;
+    }
+    return arr3;
+}
+
 
 // Destructor
 Array::~Array(){
