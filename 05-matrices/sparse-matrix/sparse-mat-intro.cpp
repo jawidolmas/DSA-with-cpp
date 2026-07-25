@@ -137,5 +137,13 @@ int main(){
     cout << "Third Matrix\n";
     display(*s3);
 
+
+
+    delete[] s1.e;
+    delete[] s2.e;
+
+    delete[] s3->e;
+    delete s3;
+
     return 0;
 }
