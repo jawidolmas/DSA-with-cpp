@@ -40,7 +40,7 @@ struct sparse{
     element *e;   //  pointer for taking an array of element shape in heap
 };
 
-
+// Create
 void create(sparse *s){
     cout << "Add dimensions\n";
     cout << "Add Number of Rows: ";
@@ -61,6 +61,8 @@ void create(sparse *s){
     }
 }
 
+// Display
+
 void display(sparse s){
     int i, j, k = 0;
     for(i = 0; i<s.m; i++){
@@ -77,12 +79,63 @@ void display(sparse s){
 }
 
 
+// Addition
+sparse *addition(sparse *s1, sparse *s2){
+    sparse *sum;
+    int i , j, k;
+    i = j = k = 0;
+    sum = new sparse;
+    sum->e = new element[s1->num + s2->num];
+    while(i<s1->num && j<s2->num){
+        if(s1->e[i].i < s2->e[j].i ){
+            sum->e[k++] = s1->e[i++];
+        }
+        else if(s1->e[i].i > s2->e[j].i){
+            sum->e[k++] = s2->e[j++];
+        }
+        else{
+            if(s1->e[i].j < s2->e[j].j){
+                sum->e[k++] = s1->e[i++];
+            }
+            else if(s1->e[i].j > s2->e[j].j){
+                sum->e[k++] = s2->e[j++];
+            }
+            else {
+                sum->e[k] = s1->e[i];
+                sum->e[k].x = s1->e[i].x + s2->e[j].x;
+                i++;
+                j++;
+                k++;
+            }
+        }
+    }
+    for(; i<s1->num; i++){
+        sum->e[k++] = s1->e[i];
+    }
+    
+    for(; j<s2->num; j++){
+        sum->e[k++] = s2->e[j];
+    }
+    sum->m = s1->m;
+    sum->n = s1->n;
+    sum->num = k;
+
+    return sum;
+}
+
 
 int main(){
-    sparse s;
-    create(&s);
-    display(s);
-
+    sparse s1, s2, *s3;
+    create(&s1);
+    cout << "Now Second Matrix:\n";
+    create(&s2);
+    s3 = addition(&s1, &s2);
+    cout << "First Matrix\n";
+    display(s1);
+    cout << "Second Matrix\n";
+    display(s2);
+    cout << "Third Matrix\n";
+    display(*s3);
 
     return 0;
 }
