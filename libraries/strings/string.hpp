@@ -5,6 +5,7 @@ class MyString{
         size_t capacity;
     public:
         MyString(const char *s);
+        MyString(const MyString &other);
         ~MyString();
         void display() const;
         int length() const;
@@ -14,10 +15,12 @@ class MyString{
         void ToLowerCase();
         void ToUpperCase();
         void ToggleCase();
-        void checkAlphabetic() const;
-        void checkNumeric() const;
-        void checkAlphanumeric() const;
-        void validateStringFormat();
+        bool isAlphabetic() const;
+        bool hasAtleastOneChar() const;
+        bool isNumeric() const;
+        bool isAlphanumeric() const;
+        bool hasLeastOneNum() const;
+        bool isValidIdentifier() const;
         void compareStrings(MyString S1, MyString S2) const;
         void equalityCheck(MyString S1, MyString S2) const;
         void linearSearchChar(char A) const;
