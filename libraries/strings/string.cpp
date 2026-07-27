@@ -15,6 +15,13 @@ MyString::MyString(const char *s){
     data[size] = '\0';
 }
 
+MyString::MyString(const MyString &other){
+    size = other.size;
+    capacity = other.capacity;
+    data = new char[capacity + 1];
+    for(size_t i = 0; i <= size; i++) data[i] = other.data[i];
+}
+
 MyString::~MyString(){
         delete []data;
 }
@@ -51,3 +58,124 @@ bool MyString::isEmpty() const{
     }
     else return false;
 }
+
+
+
+// Uppercase to Lowercase
+
+void MyString::ToLowerCase(){
+
+    for(int i = 0; data[i]!='\0'; i++){
+        if(data[i] >= 'A' && data[i] <= 'Z'){
+            data[i] = data[i] + 32;
+        }
+        std::cout << data[i];
+    }
+}
+
+//Lowercase to Uppercase
+
+void MyString::ToUpperCase(){
+    for(int i = 0; data[i]!='\0'; i++){
+        if(data[i] >= 'a' && data[i] <= 'z'){
+            data[i] = data[i] -32;
+        }
+        std::cout << data[i];
+    }
+}
+
+//Toggle case
+
+void MyString::ToggleCase(){
+    for(int i = 0; data[i]!='\0'; i++){
+        if(data[i] >= 'A' && data[i] <= 'Z'){
+            data[i] = data[i] +32;
+        }else if(data[i] >= 'a' && data[i] <= 'z'){
+            data[i] = data[i] - 32;
+        }
+        std::cout << data[i];
+    }
+}
+
+
+// Check if string is alphabetic
+bool MyString::isAlphabetic() const{
+    for(int i = 0; data[i]!='\0'; i++){
+        if(!((data[i] >= 'A' && data[i] <= 'Z') || (data[i] >= 'a' && data[i] <='z'))){
+            return false;
+        }
+    }
+    return true;
+}
+
+// Check if at least on character exist in a string
+bool MyString::hasAtleastOneChar() const{
+    for(int i = 0; data[i]!='\0'; i++){
+        if((data[i] >= 'A' && data[i] <= 'Z') || (data[i] >= 'a' && data[i] <='z')){
+            return true;
+        }
+    }
+    return false;
+}
+
+
+// Check whether every character is a digit
+bool MyString::isNumeric() const{
+    for(int i = 0; data[i]!='\0'; ++i){
+        if(!(data[i] >= '0' && data[i] <= '9')){
+            return false;
+        }
+    }
+    return true;
+}
+
+// check if at least one number exist
+bool MyString::hasLeastOneNum() const{
+    for(int i = 0; data[i]!='\0'; ++i){
+        if((data[i] >= '0' && data[i] <= '9')){
+            return true;
+        }
+    }
+    return false;
+}
+
+
+// Checks if given string is valid identifier
+bool MyString::isValidIdentifier() const{
+    if (size == 0) return false;
+
+    if (!( (data[0] >= 'A' && data[0] <= 'Z') ||
+           (data[0] >= 'a' && data[0] <= 'z') ||
+           data[0] == '_' )) {
+        return false;
+    }
+    for(int i = 1; data[i]!='\0'; i++){
+        if (!( (data[i] >= 'A' && data[i] <= 'Z') ||
+               (data[i] >= 'a' && data[i] <= 'z') ||
+               (data[i] >= '0' && data[i] <= '9') ||
+               data[i] == '_' )){
+                return false;
+               }
+    }
+    return true;
+}
+
+// Compare two strings
+ void MyString::compareStrings(MyString S1, MyString S2) const{
+        int i, j;
+        for(i = 0, j = 0; S1.data[i]!='\0' && S2.data[j]!='\0'; i++, j++){
+            if(S1.data[i] != S2.data[j]){
+                std::cout << "Strings are not equal\n";
+                break;
+            }
+        }
+        if(S1.data[i] > S2.data[j]){
+            std::cout << "First string is Bigger\n";
+        }
+        else if(S1.data[i] < S2.data[j]){
+            std::cout << "Second string is bigger\n";
+        }
+        else{
+            std::cout << "Both strings are equal\n";
+        }
+ }
