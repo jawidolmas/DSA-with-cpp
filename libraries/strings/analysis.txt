@@ -1,0 +1,112 @@
+STRING.CPP — FUNCTION ANALYSIS
+==============================
+Data structure: dynamic char array (data = new char[capacity+1]), null-terminated, size/capacity tracked separately.
+
+------------------------------------------------------------
+MyString(const char *s)                            [Constructor]
+Time:  O(n) — walks input once to find length, then copies n characters
+Space: O(n)
+Notes: No null check on s. Capacity always set equal to size — no spare room, so isFull()
+       is always true right after construction.
+
+------------------------------------------------------------
+MyString(const MyString &other)                    [Copy constructor]
+Time:  O(n)
+Space: O(n)
+Notes: Deep copy, correctly allocates its own buffer. Required by the Rule of Three since the
+       destructor frees data — without this, pass-by-value anywhere (e.g. compareStrings'
+       original signature) causes a shallow copy, double-free, and crash on scope exit.
+       No copy assignment operator (operator=) is defined yet — assigning one MyString to
+       another still shallow-copies the pointer and will double-free. Same fix needed there.
+
+------------------------------------------------------------
+~MyString()                                         [Destructor]
+Time:  O(1)
+Space: O(1)
+Notes: Correctly releases data with delete[]. Relies on copy constructor (and eventually
+       operator=) being correct to avoid double-free — see above.
+
+------------------------------------------------------------
+display() const
+Time:  O(n)
+Space: O(1)
+
+------------------------------------------------------------
+length() const
+Time:  O(1)
+Space: O(1)
+
+------------------------------------------------------------
+isFull() const / isEmpty() const
+Time:  O(1) each
+Space: O(1)
+Notes: Both can be written as a single return statement instead of if/else — stylistic only.
+       isFull() is always true as-is, since capacity is never set larger than size.
+
+------------------------------------------------------------
+ToLowerCase() / ToUpperCase() / ToggleCase()
+Time:  O(n) each
+Space: O(1)
+Notes: These mutate data in place, but also print inside the same loop rather than being
+       separated from display() — mixes responsibilities. No return value or way to get the
+       cased string back without printing.
+
+------------------------------------------------------------
+isAlphabetic() const
+Time:  O(n) worst case (all characters checked), O(1) best case (first char fails)
+Space: O(1)
+
+------------------------------------------------------------
+hasAtleastOneChar() const
+Time:  O(n) worst case, O(1) best case
+Space: O(1)
+
+------------------------------------------------------------
+isNumeric() const
+Time:  O(n) worst case, O(1) best case
+Space: O(1)
+
+------------------------------------------------------------
+hasLeastOneNum() const
+Time:  O(n) worst case, O(1) best case
+Space: O(1)
+
+------------------------------------------------------------
+isValidIdentifier() const
+Time:  O(n)
+Space: O(1)
+Notes: Correctly handles empty string and first-character rule separately from the rest of
+       the body. Logic is sound.
+
+------------------------------------------------------------
+compareStrings(MyString S1, MyString S2) const
+Time:  O(n) — single pass comparing characters until mismatch or a null terminator
+Space: O(1) extra, but O(n) hidden cost from pass-by-value parameters (two full copies made
+       on every call via the copy constructor)
+Notes: Comparison logic is correct: loop breaks on first mismatch, then compares data[i] vs
+       data[j] at the break point (or at the terminating null if strings matched up to the
+       shorter one's end) to decide ordering. Recommend passing S1/S2 by const reference
+       instead of by value to avoid the unnecessary O(n) copies per call.
+
+==============================
+SUMMARY TABLE
+
+Function                Time      Space
+MyString (ctor)          O(n)      O(n)
+MyString (copy ctor)     O(n)      O(n)
+~MyString (dtor)         O(1)      O(1)
+display                  O(n)      O(1)
+length                   O(1)      O(1)
+isFull / isEmpty         O(1)      O(1)
+ToLowerCase              O(n)      O(1)
+ToUpperCase              O(n)      O(1)
+ToggleCase               O(n)      O(1)
+isAlphabetic             O(n)      O(1)
+hasAtleastOneChar        O(n)      O(1)
+isNumeric                O(n)      O(1)
+hasLeastOneNum           O(n)      O(1)
+isValidIdentifier        O(n)      O(1)
+compareStrings           O(n)      O(1) extra (O(n) copy overhead from pass-by-value)
+
+Not yet implemented: clear, isAlphanumeric, equalityCheck, linearSearchChar,
+countVowels, countConstants, countWords, duplicateCharDetect
