@@ -17,6 +17,7 @@ class linkedlist{
         ~linkedlist();
         void append(int value);
         void displayLoop();
+        int countNodes();
         void insert(int pos, int value);
 
 };
@@ -68,8 +69,27 @@ void linkedlist::displayLoop(){
     }
 }
 
+//count node
+int linkedlist::countNodes(){
+    int count = 0;
+    node *temp = head;
+    while(temp != nullptr){
+        count++;
+        temp = temp->next;
+    }
+    return count;
+}
+
+
+
+
 // Inserting a value in a given position in linked list
 void linkedlist::insert(int pos, int value){
+    int length = countNodes();
+    if(pos < 0 || pos > length){
+        std::cout << "Position index is invalid\n";
+        return;
+    }
     node *temp = new node;                      // For adding new value
     if(pos == 0){                       // if list is empty
         temp->data = value;
@@ -78,7 +98,7 @@ void linkedlist::insert(int pos, int value){
     }
     else if(pos > 0){
         node *p = head;             // For tracing the position from first node to pos
-        for(int i = 0; i<pos-1 && p; i++){
+        for(int i = 0; i<pos-1; i++){
             p = p->next;
         }
             if(p){
@@ -97,7 +117,7 @@ int main()
     lin.append(20);
     lin.append(30);
     lin.append(800);
-    lin.insert(2, 40);
+    lin.insert(3, 40);
     lin.displayLoop();
    
 }
