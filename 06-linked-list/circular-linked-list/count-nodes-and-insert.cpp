@@ -77,12 +77,13 @@ void linkedlist::display(){
 
 // Count nodes of a circular linked list
 int linkedlist::countNodes(){
+    if(head == nullptr) return 0;       // empty list
     node *temp = head;
     int count = 0;
-    while(temp->next != head){
+    do{
         count++;
         temp = temp->next;
-    }
+    }while(temp != head);
     return count;
 }
 
