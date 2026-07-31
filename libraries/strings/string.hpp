@@ -22,7 +22,7 @@ class MyString{
         bool hasLeastOneNum() const;
         bool isValidIdentifier() const;
         void compareStrings(MyString S1, MyString S2) const;
-        void equalityCheck(MyString S1, MyString S2) const;
+        bool equalityCheck(MyString &S1, MyString &S2) const;
         void linearSearchChar(char A) const;
         void countVowels() const;
         void countConstants() const;
