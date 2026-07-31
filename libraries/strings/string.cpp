@@ -179,3 +179,67 @@ bool MyString::isValidIdentifier() const{
             std::cout << "Both strings are equal\n";
         }
  }
+
+
+ // Equality check
+ bool MyString::equalityCheck(MyString &S1, MyString &S2) const{
+        int i, j;
+        for(i = 0, j = 0; S1.data[i]!='\0' || S2.data[j]!='\0'; i++, j++){
+            if(S1.data[i] != S2.data[j]){
+                return false;
+            }
+        }
+        return true;
+}  
+
+// Linear Search
+void MyString::linearSearchChar(char A) const{
+    bool found = false;
+    int i;
+    for(i = 0; data[i]!='\0'; i++){
+        if(A == data[i]){
+            found = true;
+            std::cout << A << " Found at index " << i << " \n";
+            break;
+        }
+    }
+    if(!found){
+        std::cout << "Not Found\n";
+        return;
+    }
+}
+
+// Count Vowels
+void MyString::countVowels() const{
+    int i, vowels = 0;
+    for(i = 0; data[i]!='\0'; i++){
+        if(data[i] == 'a' || data[i] == 'e' || data[i] == 'i' || data[i] == 'o' || data[i] == 'u' || 
+           data[i] == 'A' || data[i] == 'E' || data[i] == 'I' || data[i] == 'O' ||data[i] == 'U'){
+            vowels++;
+           }
+    }
+    std::cout << "Vowels: " << vowels << "\n";
+}
+
+// Count Constants
+void MyString::countConstants() const{
+    int i, constants = 0;
+    for(i = 0; data[i]!='\0'; i++){
+        if(data[i] != 'a' && data[i] != 'e' && data[i] != 'i' && data[i] != 'o' && data[i] != 'u' && 
+           data[i] != 'A' && data[i] != 'E' && data[i] != 'I' && data[i] != 'O' &&data[i] != 'U'){
+            constants++;
+           }
+    }
+    std::cout << "Constants: " << constants << "\n";
+}
+
+// Count words
+void MyString::countWords() const{
+    int i, words=0;
+    for(i = 0; data[i]!='\0'; i++){
+        if(data[i] == ' '){
+            words++;
+        }
+    }
+    std::cout << "Words: "<< words+1 << "\n";       //+1 coz of first word
+}
