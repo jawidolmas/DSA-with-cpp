@@ -1,0 +1,138 @@
+LINKEDLIST.CPP — FUNCTION ANALYSIS
+==============================
+Data structure: singly linked list, node{int data; node* next;}, head pointer as only state.
+
+------------------------------------------------------------
+linkedlist()                                       [Constructor]
+Time:  O(1)
+Space: O(1)
+Notes: Just sets head = nullptr. No allocation happens here, list starts empty.
+
+------------------------------------------------------------
+~linkedlist()                                      [Destructor]
+Time:  O(n) — walks and deletes every node once
+Space: O(1) extra (iterative, not recursive, no stack growth)
+Notes: Correctly saves next before delete, avoiding use-after-free. No copy constructor / copy
+       assignment defined, so copying a linkedlist (pass-by-value) does a shallow copy of head
+       and will double-free on destruction. Rule of Three violated, same caveat as Array class.
+
+------------------------------------------------------------
+length() const
+Time:  O(n) — must walk full list, no size counter maintained
+Space: O(1)
+Notes: Every call re-walks list from head. If length() is called repeatedly in one operation
+       (e.g. insert() and removeIndex() both call length() for bounds checking), that's an extra
+       O(n) pass each time — fine for this exercise, but a size member updated on
+       append/prepend/remove would make this O(1) instead.
+
+------------------------------------------------------------
+isEmpty() const
+Time:  O(1)
+Space: O(1)
+Notes: Single pointer check, could be written as return head == nullptr; instead of if/else —
+       purely stylistic, same complexity.
+
+------------------------------------------------------------
+display() const
+Time:  O(n)
+Space: O(1) extra
+Notes: Straightforward, nothing to optimize.
+
+------------------------------------------------------------
+clearList()
+Time:  O(n)
+Space: O(1)
+Notes: Same walk-and-delete pattern as destructor, correctly resets head = nullptr afterward so
+       object is safely reusable (unlike destructor, which doesn't need to, object is dying anyway).
+
+------------------------------------------------------------
+prepend(int value)
+Time:  O(1)
+Space: O(1)
+Notes: No traversal needed, new node just takes over as head. Correct empty/non-empty handling.
+
+------------------------------------------------------------
+append(int value)
+Time:  O(n) — must walk to last node, no tail pointer kept
+Space: O(1)
+Notes: Same "no tail pointer" cost as append discussion earlier. A tail member would make this
+       O(1), same tradeoff as the Array's lack of amortized resizing.
+
+------------------------------------------------------------
+insert(int index, int value)
+Time:  O(n) worst case — walks up to index-1 nodes, plus one O(n) call to length() for bounds check
+Space: O(1)
+Notes: 0-based, index == length() is valid (append-at-end via insert). Bounds check
+       (index < 0 || index > length()) correct for this convention.
+
+------------------------------------------------------------
+removeFirst()
+Time:  O(1)
+Space: O(1)
+Notes: No traversal needed, direct head swap. Correctly guards empty list, returns -1 sentinel.
+
+------------------------------------------------------------
+removeLast()
+Time:  O(n) — must walk to second-to-last node, no tail/prev tracking
+Space: O(1)
+Notes: Correctly special-cases single-node list (head->next == nullptr) separately from general
+       case. -1 sentinel collides with -1 being a legitimate stored value, same caveat as
+       Array's get().
+
+------------------------------------------------------------
+removeIndex(int index)
+Time:  O(n) worst case — walks up to index-1 nodes, plus one O(n) call to length()
+Space: O(1)
+Notes: 1-based (index == 1 is first element), bounds check (index < 1 || index > length())
+       correctly matches this convention. Correctly special-cases removing the only node.
+
+------------------------------------------------------------
+linearSearch(int key) const
+Time:  O(n) worst case
+Space: O(1)
+Notes: Returns early on first match (return 1), unlike Array's linearsearch which scans fully.
+       Only reports presence, not position, so no sentinel collision.
+
+------------------------------------------------------------
+getElement(int index) const
+Time:  O(n) worst case — walks to index, plus one O(n) call to length() for bounds check
+Space: O(1)
+Notes: BUG — bounds check is index < 0 || index > length(), should be index >= length().
+       Valid indices are 0 to length()-1. index == length() passes the check, loop walks temp
+       to nullptr, then temp->data dereferences a null pointer. Crash on getElement(length()).
+
+------------------------------------------------------------
+setElement(int index, int value)
+Time:  O(n) worst case — same shape as getElement
+Space: O(1)
+Notes: Same BUG as getElement — index > length() should be index >= length(), identical
+       off-by-one, identical crash on setElement(length()).
+
+------------------------------------------------------------
+reverse()
+Time:  O(n) — visits every node once
+Space: O(1)
+Notes: Standard 3-pointer iterative reversal (p, q, r). Correct, no extra allocation, no
+       recursion, single pass.
+
+
+==============================
+SUMMARY TABLE
+
+Function              Time     Space   Notes
+linkedlist (ctor)     O(1)     O(1)
+~linkedlist (dtor)    O(n)     O(1)
+length                O(n)     O(1)    no size counter kept
+isEmpty               O(1)     O(1)
+display               O(n)     O(1)
+clearList             O(n)     O(1)
+prepend               O(1)     O(1)
+append                O(n)     O(1)    no tail pointer kept
+insert                O(n)     O(1)    1-based
+removeFirst           O(1)     O(1)
+removeLast            O(n)     O(1)    no tail/prev tracking
+removeIndex           O(n)    O(1)     1-based
+linearSearch          O(n)     O(1)    early return
+getElement            O(n)     O(1)    
+setElement            O(n)     O(1)    
+reverse               O(n)     O(1)
