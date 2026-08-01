@@ -362,3 +362,20 @@ int linkedlist::deleteAllOccurence(int value){
     }
     return x;
 }
+
+
+// Search Recursively
+int linkedlist::recursiveSearch(node *head, int key) const{
+    if(head == nullptr){
+        return 0;
+    }
+    if(head->data == key){
+        return 1;
+    }
+    return recursiveSearch(head->next, key);
+}
+
+// wrapper function for recursiveSearch(head, key) to access head. head is private
+int linkedlist::searchRec(int key) const{
+    return recursiveSearch(head, key);
+}

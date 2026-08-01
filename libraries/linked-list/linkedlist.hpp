@@ -26,7 +26,9 @@ class linkedlist{
         void insertAfterValue(int value, int addValue);
         void insertBeforeValue(int value, int addValue);
         int  deleteFirstOccurence(int value);
-        int  deleteAllOccurence(int value); 
+        int  deleteAllOccurence(int value);
+        int  recursiveSearch(node *head, int key) const; 
+        int  searchRec(int key) const;
 
 
 };

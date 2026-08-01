@@ -15,8 +15,9 @@ int main()
     lin.append(50);
     lin.append(50);
     lin.display();                             // 10 20 30 40 50
-    std::cout << lin.deleteAllOccurence(50) << std::endl;
+    std::cout << lin.searchRec(60) << std::endl;
     lin.display();
+    
 
     return 0;
 }
