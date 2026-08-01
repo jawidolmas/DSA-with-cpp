@@ -246,3 +246,119 @@ void linkedlist::reverse(){
     }
     head = q;
 }
+
+// Insert after a given value
+void linkedlist::insertAfterValue(int value, int addValue){
+    node *temp = new node, *p = head;
+    temp->data = addValue;
+    temp->next = nullptr;
+    if(isEmpty()){
+        std::cout << "List is empty, cannot add after value\n";
+        delete temp;
+        temp = nullptr;
+        return;
+    }
+    while(p != nullptr && p->data != value){    // p->data != value && p != nullptr. CRASHES. SHORT CIRCUIT EVALUATION. 
+            p = p->next;
+    }
+    if(p == nullptr){
+            std::cout << "Value not found\n";
+            delete temp;
+            temp = nullptr;
+            return;
+    }
+    temp->next = p->next;
+    p->next = temp;
+}
+
+//Insert before a given value
+void linkedlist::insertBeforeValue(int value, int addValue){
+    node *temp = new node, *p = head, *q = nullptr;
+    temp->data = addValue;
+    temp->next = nullptr;
+    if(isEmpty()){
+        std::cout << "List is empty, cannot add before value\n";
+        delete temp;
+        temp = nullptr;
+        return;
+    }
+    if(head->data == value){
+        temp->next = head;
+        head = temp;
+    }else{
+    while(p != nullptr && p->data != value){
+        q = p;
+        p = p->next;
+    }
+    if(p == nullptr){
+        std::cout << "Value not found\n";
+        delete temp;
+        temp = nullptr;
+        return;
+    }
+
+    temp->next = q->next;     // temp->next = p; correct too.
+    q->next = temp;
+    }
+}
+
+
+// Delete first occurence by value
+int linkedlist::deleteFirstOccurence(int value){
+    node *temp = head, *p = nullptr;
+    int x = 0;
+    if(isEmpty()){
+        return -1;
+    }
+    if(head->data == value){
+        head = head->next;
+        x = temp->data;
+        delete temp;
+        temp = nullptr;
+    }else{
+        while(temp!=nullptr && temp->data != value){
+            p = temp;
+            temp = temp->next;
+        }
+        if(temp!= nullptr && temp->data == value){
+            p->next = temp->next;
+            x = temp->data;
+            delete temp;
+            temp = nullptr;
+        } else return -1;
+
+    }
+    return x;
+}
+
+
+// Delete all occurrences of a value
+int linkedlist::deleteAllOccurence(int value){
+    if(isEmpty()){
+        return -1;
+    }
+    node *temp = head, *p = nullptr;
+    int x = 0;
+
+    while(temp != nullptr){
+        if(temp->data == value){
+            node *toDelete = temp;
+            if(p == nullptr){
+                head = temp->next;
+            } else {
+                p->next = temp->next;
+            }
+            temp = temp->next;
+            delete toDelete;
+            x++;
+        } else {
+            p = temp;
+            temp = temp->next;
+        }
+    }
+
+    if(x == 0){
+        return -1;
+    }
+    return x;
+}
