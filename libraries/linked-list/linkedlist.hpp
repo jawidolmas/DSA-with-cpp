@@ -23,6 +23,10 @@ class linkedlist{
         int  getElement(int index) const;
         void setElement(int index, int value);
         void reverse();
+        void insertAfterValue(int value, int addValue);
+        void insertBeforeValue(int value, int addValue);
+        int  deleteFirstOccurence(int value);
+        int  deleteAllOccurence(int value); 
 
 
 };
