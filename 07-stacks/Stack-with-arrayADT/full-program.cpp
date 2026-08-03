@@ -114,7 +114,7 @@ void StackArray::display() const{
     if(isEmpty()){
         cout << "Stack is empty\n";
     }
-    for(int i = 0; i < size; i++){
+    for(int i = top; i >= 0; i--){
         cout << A[i] << " ";
     }
     cout << endl;
