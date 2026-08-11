@@ -54,6 +54,6 @@ int main()
 
     /*
         ANALYSIS:
-            DEQUEUE function is O(1) in both terms of time and space. As we can see, we just increment rear and add the value. There is no loop, and no other 
+            ENQUEUE function is O(1) in both terms of time and space. As we can see, we just increment rear and add the value. There is no loop, and no other 
             extra works. 
     */
