@@ -52,4 +52,9 @@ int Arr[n];
 
 -This is possible, becuase in Cpp, it will be decided in run time. 
 
+
+EDITING A MISMATCH: The info about array size decision for C and Cpp has been reversed. its vice versa 
+of the statements you read above. C-> runtime time. Cpp->Compile time.
+Edited on: 2026/Aug/26
+
 */
