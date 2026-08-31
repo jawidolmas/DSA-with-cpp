@@ -386,7 +386,19 @@ void Array::Rightshift(){
     
 }
 
-
+// Check if array is sorted
+bool Array::isSorted() const{
+    if(size <= 1){
+        return true;
+    }
+    int i;
+    for(i=0; i < size-1; i++){
+        if(A[i] > A[i+1]){
+            return false;
+        }
+    }
+    return true;
+}
 
 // Destructor
 Array::~Array(){

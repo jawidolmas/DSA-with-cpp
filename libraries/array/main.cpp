@@ -16,6 +16,7 @@ int main(){
         arr.append(Value[i]);
         arr2.append(Value1[i]);
     }
+    std::cout << arr.isSorted() << std::endl; 
    /* arr.append(10);
     arr.append(20);
     arr.append(30);
@@ -38,6 +39,7 @@ int main(){
     arr3.display();
     arr.ReverseUsingAuxiliaryArray(arr);
     arr.display();
+    
    
     
 

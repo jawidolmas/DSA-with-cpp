@@ -31,4 +31,5 @@ class Array{
         void ReverseUsingAuxiliaryArray(Array &arr);
         void leftshift();
         void Rightshift();
+        bool isSorted() const;
 };
