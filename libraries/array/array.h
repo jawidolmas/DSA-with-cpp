@@ -32,4 +32,5 @@ class Array{
         void leftshift();
         void Rightshift();
         bool isSorted() const;
+        void insertSorted(int val);
 };
