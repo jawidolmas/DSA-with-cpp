@@ -400,7 +400,28 @@ bool Array::isSorted() const{
     return true;
 }
 
+
+// Insert into Sorted Array
+void Array::insertSorted(int val){
+    if(size >= capacity){
+        std::cout << "Array is full\n";
+        return;
+    }
+
+    int i = size-1;
+    while(i >=0 && A[i] > val){
+        A[i+1] = A[i];
+        i--;
+    }
+    A[i+1] = val;
+    size++;
+}
+
+
+
+
 // Destructor
 Array::~Array(){
     delete []A;
 }
+
