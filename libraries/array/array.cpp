@@ -417,7 +417,26 @@ void Array::insertSorted(int val){
     size++;
 }
 
+// Rearrange negative and positive numbers
+void Array::rearrangeNegandPos(){
+    if(isEmpty()){
+        std::cout << "Array is empty\n";
+        return;
+    }
 
+    int i = 0, j=size-1;
+    while(i<j){
+        while(A[i] < 0){
+            i++;
+        }
+        while(A[j] >= 0){
+            j--;
+        }
+        if(i<j){
+            swap(A[i], A[j]);
+        }
+    }
+}
 
 
 // Destructor
