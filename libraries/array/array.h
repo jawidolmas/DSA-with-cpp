@@ -33,4 +33,5 @@ class Array{
         void Rightshift();
         bool isSorted() const;
         void insertSorted(int val);
+        void rearrangeNegandPos();
 };

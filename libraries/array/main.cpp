@@ -7,7 +7,7 @@ using namespace std;
 
 int main(){
 
-    int Value[5] = {1, 2, 3, 8};
+    int Value[5] = {1, 2, -3, -8, 5};
     int Value1[5] = {6, 8, 9, 12, 15};
     Array arr(5);
     Array arr2(5);
@@ -18,6 +18,7 @@ int main(){
     }
     std::cout << arr.isSorted() << std::endl; 
     arr.insertSorted(5);
+    arr.rearrangeNegandPos();
    /* arr.append(10);
     arr.append(20);
     arr.append(30);
