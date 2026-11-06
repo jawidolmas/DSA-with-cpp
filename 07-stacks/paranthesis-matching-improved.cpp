@@ -104,8 +104,10 @@ void stackLL::display() const{
 
 // Paranthesis matching Improved 
 void stackLL::paranthesisMatch(char *A){
+    bool foundPranthesis = false;
     for(int i = 0; A[i]!='\0'; i++){
         if(A[i] == '(' || A[i] == '{' || A[i] == '['){
+            foundPranthesis = true;
             push(A[i]);
         }else if(A[i] == ')' || A[i] == '}' || A[i] == ']'){
             if(isEmpty()) {
@@ -116,6 +118,7 @@ void stackLL::paranthesisMatch(char *A){
                             (A[i] == ']' && top->data == '[')||
                             (A[i] == '}' && top->data == '{'));
             if(matches){ 
+                foundPranthesis = true;
                 pop();
             }
             else{
@@ -124,7 +127,10 @@ void stackLL::paranthesisMatch(char *A){
             }
         }   
     }
-    if(isEmpty()){
+    if(!foundPranthesis){
+        cout << "No paranthesis found at all\n";
+    }
+    else if(isEmpty()){
         cout << "Paranthesis Matched\n";
     }
     else{
